@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -104,9 +105,21 @@ public class PersonalInfoRepositoryImpl implements IPersonalInfoRepository {
         return null;
     }
 
+    // @Override
+    // public Optional<PersonalInfo> findById(Long id) {
+    //     String sql = "Select * From personal_info Where id = ?";
+    //     List<PersonalInfo> infos = jdbcTemplate.query(sql, personalInfoRowMapper);
+    //     return infos.stream().findFirst();
+    // }
     @Override
     public Optional<PersonalInfo> findById(Long id) {
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+        String sql = "Select * From personal_info Where id = ?";
+        try {
+            return Optional.ofNullable(jdbcTemplate.queryForObject(sql, personalInfoRowMapper, id));
+
+        } catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
     }
 
     @Override
