@@ -51,7 +51,7 @@ public class PersonalInfoRepositoryImpl implements IPersonalInfoRepository {
                 ps.setString(2, personalInfo.getLastName());
                 ps.setString(3, personalInfo.getTitle());
                 ps.setString(4, personalInfo.getProfileDescription());
-                ps.setString(1, personalInfo.getProfileImageUrl());
+                ps.setString(5, personalInfo.getProfileImageUrl());
 
                 if (personalInfo.getYearsOfExperience() != null) {
                     ps.setInt(6, personalInfo.getYearsOfExperience());
@@ -63,13 +63,15 @@ public class PersonalInfoRepositoryImpl implements IPersonalInfoRepository {
                 ps.setString(7, personalInfo.getEmail());
                 ps.setString(8, personalInfo.getPhone());
                 ps.setString(9, personalInfo.getLinkedinUrl());
-                ps.setString(1, personalInfo.getGithubUrl());
+                ps.setString(10, personalInfo.getGithubUrl());
 
                 return ps;
 
             }, keyHolder);
 
             personalInfo.setId(Objects.requireNonNull(keyHolder.getKey()).longValue());
+
+            return personalInfo;
 
             // jdbcTemplate.update(sql, 
             //     personalInfo.getFirstName(),
@@ -97,12 +99,13 @@ public class PersonalInfoRepositoryImpl implements IPersonalInfoRepository {
                 personalInfo.getEmail(),
                 personalInfo.getPhone(),
                 personalInfo.getLinkedinUrl(),
-                personalInfo.getGithubUrl()
+                personalInfo.getGithubUrl(),
+                personalInfo.getId()
             );
 
-        }
+            return personalInfo;
 
-        return null;
+        }
     }
 
     // @Override

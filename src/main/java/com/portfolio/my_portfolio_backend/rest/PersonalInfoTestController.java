@@ -11,7 +11,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -31,13 +36,19 @@ public class PersonalInfoTestController {
     }
     
     @GetMapping("/{id}")
-    public PersonalInfo getPersonalInfoById(Long id) {
+    public PersonalInfo getPersonalInfoById(@PathVariable Long id) {
         Optional<PersonalInfo> info = personalInfoService.findById(id);
         if (info.isPresent()) {
             return info.get();
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Informacion personal no disponible en el ID: " + id);
         }
+    }
+    
+    @PostMapping
+    public ResponseEntity<PersonalInfo> savePersonalInfo(@RequestBody PersonalInfo personalInfo) {
+        PersonalInfo newPersonalInfo = personalInfoService.save(personalInfo);
+        return new ResponseEntity<>(newPersonalInfo, HttpStatus.CREATED);
     }
     
 
