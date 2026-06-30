@@ -12,9 +12,11 @@ import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -50,6 +52,16 @@ public class PersonalInfoTestController {
         PersonalInfo newPersonalInfo = personalInfoService.save(personalInfo);
         return new ResponseEntity<>(newPersonalInfo, HttpStatus.CREATED);
     }
+
+    @PutMapping("/{id}")
+    public PersonalInfo update(@PathVariable Long id, @RequestBody PersonalInfo personalInfo) {
+        personalInfo.setId(id);
+        return personalInfoService.save(personalInfo);
+    }
     
+    @DeleteMapping("/{id}")
+    public void deleteBy(@PathVariable Long id) {
+        personalInfoService.deleteById(id);
+    }
 
 }
