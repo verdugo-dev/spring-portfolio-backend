@@ -9,6 +9,6 @@ public interface IExperienceService {
     List<Experience> findAll();
     Optional<Experience> findById(Long id);
     Experience save(Experience experience);
-    void deleteById();
+    void deleteById(Long id);
     List<Experience> findExperienceByPersonalInfoId(Long personalInfoId);
 }

@@ -50,15 +50,13 @@ public class ExperienceServiceImpl implements IExperienceService {
     }
 
     @Override
-    public void deleteById() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteById'");
+    public void deleteById(Long id) {
+        experienceRepository.deleteById(id);
     }
 
     @Override
     public List<Experience> findExperienceByPersonalInfoId(Long personalInfoId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findExperienceByPersonalInfoId'");
+        return experienceRepository.findByPersonalInfoId(personalInfoId);
     }
 
 }
