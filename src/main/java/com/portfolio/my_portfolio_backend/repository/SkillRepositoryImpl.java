@@ -55,11 +55,19 @@ public class SkillRepositoryImpl implements ISkillRepository {
             skill.setId(Objects.requireNonNull(keyHolder.getKey()).longValue());
 
         } else {
+            String sql = "UPDATE skills SET name = ?, level_percentage = ?, icon_class = ?, " +
+                "personal_info_id = ? WHERE id = ?";
 
-
+            jdbcTemplate.update(sql,
+                skill.getName(),
+                skill.getLevelPercentage(),
+                skill.getIconClass(),
+                skill.getPersonalInfoId(),
+                skill.getId()
+            );
         }
 
-        return null;
+        return skill;
     }
 
     @Override
