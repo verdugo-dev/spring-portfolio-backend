@@ -1,5 +1,6 @@
 package com.portfolio.my_portfolio_backend.model;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PersonalInfo {
     private Long id;
+
+    @NotBlank(message = "El nombre no puede estar vacio")
     private String firstName;
     private String lastName;
     private String title;
