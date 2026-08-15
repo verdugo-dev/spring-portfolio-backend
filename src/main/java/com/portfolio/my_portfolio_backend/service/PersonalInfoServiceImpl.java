@@ -13,9 +13,6 @@ import jakarta.validation.ConstraintViolation;
 import lombok.RequiredArgsConstructor;
 
 import jakarta.validation.Validator;
-import jakarta.validation.ConstraintViolation; // <-- Y ESTE
-import org.springframework.stereotype.Service;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -29,14 +26,7 @@ public class PersonalInfoServiceImpl implements IPersonalInfoService {
         Set<ConstraintViolation<PersonalInfo>> violations = validator.validate(personalInfo);
 
         if (!violations.isEmpty()) {
-            StringBuilder sb = new StringBuilder();
-            for (ConstraintViolation<PersonalInfo> violation : violations) {
-                sb.append(violation.getPropertyPath())
-                  .append(": ")
-                  .append(violation.getMessage())
-                  .append("; ");
-            }
-            throw new IllegalArgumentException("Errores de validación: " + sb.toString());
+            throw new IllegalArgumentException(violations.iterator().next().getMessage());
         }
 
         return personalInfoRepository.save(personalInfo);
