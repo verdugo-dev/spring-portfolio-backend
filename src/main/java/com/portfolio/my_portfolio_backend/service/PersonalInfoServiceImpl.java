@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.portfolio.my_portfolio_backend.exception.ValidationException;
 import com.portfolio.my_portfolio_backend.model.PersonalInfo;
@@ -23,6 +24,7 @@ public class PersonalInfoServiceImpl implements IPersonalInfoService {
     private final Validator validator;
 
     @Override
+    @Transactional
     public PersonalInfo save(PersonalInfo personalInfo) {
         Set<ConstraintViolation<PersonalInfo>> violations = validator.validate(personalInfo);
 
@@ -35,16 +37,19 @@ public class PersonalInfoServiceImpl implements IPersonalInfoService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<PersonalInfo> findById(Long id) {
         return personalInfoRepository.findById(id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<PersonalInfo> findAll() {
         return personalInfoRepository.findAll();
     }
 
     @Override
+    @Transactional
     public void deleteById(Long id) {
         personalInfoRepository.deleteById(id);
     }
