@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Formulario de Inforamcion Personal</h1>
+    <form th:action="@{/personal-info-save}" th:object="${personalInfo}" method="post">
+        <div>
+            <label for="">Nombre: </label>
+            <input type="text" name="" th:field="*{firstName}">
+        </div>
+        <div>
+            <label for="">Email: </label>
+            <input type="text" th:field="*{email}">
+        </div>
+        <button type="submit">Guardar</button>
+    </form>
+</body>
+</html>

@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
+import com.portfolio.my_portfolio_backend.exception.ValidationException;
 import com.portfolio.my_portfolio_backend.model.PersonalInfo;
 import com.portfolio.my_portfolio_backend.repository.IPersonalInfoRepository;
 
@@ -26,7 +27,8 @@ public class PersonalInfoServiceImpl implements IPersonalInfoService {
         Set<ConstraintViolation<PersonalInfo>> violations = validator.validate(personalInfo);
 
         if (!violations.isEmpty()) {
-            throw new IllegalArgumentException(violations.iterator().next().getMessage());
+            // throw new IllegalArgumentException(violations.iterator().next().getMessage());
+            throw new ValidationException(violations);
         }
 
         return personalInfoRepository.save(personalInfo);
