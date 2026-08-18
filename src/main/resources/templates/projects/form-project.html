@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+</head>
+<body>
+    <h1>Formulario de Proyectos</h1>
+    <form th:action="@{/projects/save}" th:object="${projectDto}" method="post" enctype="multipart/form-data">
+        <div>
+            <label>Titulo:</label>
+            <input type="text" th:field="*{title}" required>
+        </div>
+        <div>
+            <label>Descripcion:</label>
+            <textarea th:field="*{description}" required></textarea>
+        </div>
+        <div>
+            <label>URL del proyecto</label>
+            <input type="url" th:field="*{projectUrl}">
+        </div>
+        <div>
+            <label>Imagen del proyecto:</label>
+            <input type="file"  name="file" required>
+        </div>
+        <div>
+            <label>ID informaciuon personal:</label>
+            <input type="number" th:field="*{personalInfoId}" required>
+        </div>
+
+        <button type="submit">Guardar Proyecto</button>
+    </form>
+</body>
+</html>
