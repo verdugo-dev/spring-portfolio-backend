@@ -1,8 +1,8 @@
 DROP TABLE IF EXISTS experiences;
 DROP TABLE IF EXISTS educations;
 DROP TABLE IF EXISTS skills;
-DROP TABLE IF EXISTS personal_info;
 DROP TABLE IF EXISTS projects;
+DROP TABLE IF EXISTS personal_info;
 
 CREATE TABLE personal_info (
     id SERIAL PRIMARY KEY,
